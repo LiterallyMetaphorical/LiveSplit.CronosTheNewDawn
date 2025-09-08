@@ -23,6 +23,7 @@
 			{"LevelStreaming",               true, "LevelStreaming",         				"GameInfo"},
 			{"GameplayTag",               true, "GameplayTag",         				"GameInfo"},
 		{"Debug", 					    false, "Print Debug Info",    							null},
+			{"Debug Desktop Data Dump",       false, "Debug Desktop Data Dump",                      "Debug"},
 			{"placeholder",       false, "placeholder",                      "Debug"},
 			{"loadRemovalReady",       false, "loadRemovalReady",                      "Debug"},
 			{"movementCheckLoad",       false, "movementCheckLoad",                      "Debug"},
@@ -265,26 +266,29 @@
 		#endregion
 
 		#region Desktop Data Dump
-		try
+		if (settings["Debug Desktop Data Dump"])
 		{
-			string desktop  = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			string filePath = Path.Combine(desktop, "CronosDump.txt");
-
-			if (!File.Exists(filePath))
-				File.WriteAllText(filePath, "CRONOS DATA DUMP\n");
-
-			// write only when ItemDisplay changes AND is non-empty
-			if (!string.IsNullOrWhiteSpace(vars.ItemDisplay) && vars.ItemDisplay != vars.LastItemDisplay)
+			try
 			{
-				using (var sw = File.AppendText(filePath))
-					sw.WriteLine(DateTime.Now.ToString("HH:mm:ss") + " - " + vars.ItemDisplay);
+				string desktop  = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				string filePath = Path.Combine(desktop, "CronosDump.txt");
 
-				vars.LastItemDisplay = vars.ItemDisplay; // remember last written value
+				if (!File.Exists(filePath))
+					File.WriteAllText(filePath, "CRONOS DATA DUMP\n");
+
+				// write only when ItemDisplay changes AND is non-empty
+				if (!string.IsNullOrWhiteSpace(vars.ItemDisplay) && vars.ItemDisplay != vars.LastItemDisplay)
+				{
+					using (var sw = File.AppendText(filePath))
+						sw.WriteLine(DateTime.Now.ToString("HH:mm:ss") + " - " + vars.ItemDisplay);
+
+					vars.LastItemDisplay = vars.ItemDisplay; // remember last written value
+				}
 			}
-		}
-		catch (Exception ex)
-		{
-			print("[Error Writing CronosDump.txt] " + ex.Message);
+			catch (Exception ex)
+			{
+				print("[Error Writing CronosDump.txt] " + ex.Message);
+			}
 		}
 		#endregion
 	
