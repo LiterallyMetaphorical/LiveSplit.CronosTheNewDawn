@@ -16,15 +16,17 @@
 			{ "Outbreak_Persistent",         true, "Outbreak",			"Chapter Splits" },
 		{"GameInfo", 					true, "Print Various Game Info",						null},
 			{"World",                 false, "Current World",                                "GameInfo"},
-			{"camTarget",               true, "Current Camera Target",         				"GameInfo"},
-			{"playerPos",       true, "playerPos",                      "GameInfo"},
+			{"camTarget",               false, "Current Camera Target",         				"GameInfo"},
+			{"playerPos",       false, "playerPos",                      "GameInfo"},
 			{"MaxAcceleration",       false, "MaxAcceleration",                      "GameInfo"},
-			{"LastItem",               true, "Last item picked up",         				"GameInfo"},
+			{"LastItem",               false, "Last item picked up",         				"GameInfo"},
+			{"LevelStreaming",               true, "LevelStreaming",         				"GameInfo"},
+			{"GameplayTag",               true, "GameplayTag",         				"GameInfo"},
 		{"Debug", 					    false, "Print Debug Info",    							null},
-			{"placeholder",       true, "placeholder",                      "Debug"},
+			{"placeholder",       false, "placeholder",                      "Debug"},
 			{"loadRemovalReady",       false, "loadRemovalReady",                      "Debug"},
 			{"movementCheckLoad",       false, "movementCheckLoad",                      "Debug"},
-			{"AcknowledgedPawn",       true, "AcknowledgedPawn",                      "Debug"},
+			{"AcknowledgedPawn",       false, "AcknowledgedPawn",                      "Debug"},
 		};
 		vars.Helper.Settings.Create(_settings);
 		#endregion
@@ -63,7 +65,13 @@
 
 		vars.splitstoComplete = new HashSet<string>();
 		vars.CompletedSplits 	 = new HashSet<string>();
-		vars.Inventory = new Dictionary<ulong, int>();
+
+		vars.LastInventoryItems = new List<string>();
+		vars.SplitInventoryItems = new HashSet<string>();
+		vars.ItemsCollected = new HashSet<string>();
+		vars.ItemSplitDone = false;
+		vars.ItemDisplay = "";
+		vars.LastItemDisplay = "";
 	}
 
 	init
@@ -117,11 +125,11 @@
 		vars.Helper["GSync"] = vars.Helper.Make<bool>(gSyncLoadCount); 
 		// gEngine - GameViewport(BD0) - World(078) - FName 
 		vars.Helper["GWorldName"] = vars.Helper.Make<ulong>(gEngine, 0xBD0, 0x078, 0x18);
-		// gEngine - LevelScriptActorClassName.SubPathString 
-		vars.Helper["LevelSubPathName"] = vars.Helper.MakeString(gEngine, 0x2C0);
+		// gEngine - GameViewport(BD0) - World(078) - FName 
+		vars.Helper["LevelStreamingName"] = vars.Helper.Make<ulong>(gEngine, 0xBD0, 0x78, 0x88, 0x0, 0x18);
 		// gEngine -> GameInstance(1210) -> LocalPlayers[0](38) -> Dereference(0) -> PlayerController(30) -> AcknowledgedPawn(370)
 		vars.Helper["AcknowledgedPawnPtr"] = vars.Helper.Make<IntPtr>(gEngine, 0x1210, 0x38, 0x0, 0x30, 0x370);
-		// gEngine -> GameInstance(1210) -> LocalPlayers[0](38) -> Dereference(0) -> PlayerController(30) -> AcknowledgedPawn(370)
+		// gEngine -> GameInstance(1210) -> LocalPlayers[0](38) -> Dereference(0) -> PlayerController(30) -> AcknowledgedPawn(370) - FName
 		vars.Helper["AcknowledgedPawnName"] = vars.Helper.Make<ulong>(gEngine, 0x1210, 0x38, 0x0, 0x30, 0x370, 0x18);
 		// gEngine -> GameInstance(1210) -> Subsystems(108)
 		vars.Helper["Subsystems"] = vars.Helper.Make<IntPtr>(gEngine, 0x1210, 0x108);
@@ -134,7 +142,9 @@
 		// gEngine -> GameInstance(1210) -> LocalPlayers[0](38) -> Dereference(0) -> PlayerController(30) -> Character(318) - Movement(6E8) - MaxAcceleration(27C)
  		vars.Helper["MaxAcceleration"] = vars.Helper.Make<float>(gEngine, 0x1210, 0x38, 0x0, 0x30, 0x318, 0x6E8, 0x27C);
 
-
+		//gEngine - GameViewport(BD0) - GWorld(78) -> GameState(160) -> - PersistentAbilitySystem(338) - PersistentGameplayTagCountMap(1250) (AllocatorInstance)
+		vars.Helper["PersistentGameplayTagCountMap"] = vars.Helper.Make<IntPtr>(gEngine, 0xBD0, 0x078, 0x160, 0x338, 0x1250);
+		vars.Helper["PersistentGameplayTagCountMapNum"] = vars.Helper.Make<int>(gEngine, 0xBD0, 0x078, 0x160, 0x338, 0x1258);
 		
 		// gEngine -> GameInstance(1210) -> LocalPlayers[0](38) -> Dereference(0) -> PlayerController(30) -> MyHUD(378) -
 		vars.Helper["NullLoad"]  = vars.Helper.Make<bool>(gEngine, 0x1210, 0x38, 0x0, 0x30, 0x378, 0x1B0);
@@ -150,9 +160,9 @@
 		vars.Helper["StateWidget"] = vars.Helper.Make<ulong>(gEngine, 0xBD0, 0x078, 0x158, 0x368, 0xE8, 0x0);
 
 		// gEngine -> GameInstance(1210) -> LocalPlayers[0](38) -> Dereference(0) -> PlayerController(30) -> AcknowledgedPawn(370) - Items(728) - CollectedItemsAllocatorInstance(1D8) - 0x0
-		vars.Helper["Items"] = vars.Helper.Make<IntPtr>(gEngine, 0x1210, 0x38, 0x0, 0x30, 0x370, 0x728, 0x1D8, 0x0);
+		vars.Helper["Items"] = vars.Helper.Make<IntPtr>(gEngine, 0x1210, 0x38, 0x0, 0x30, 0x370, 0x728, 0x1D8);
 		// gEngine -> GameInstance(1210) -> LocalPlayers[0](38) -> Dereference(0) -> PlayerController(30) -> AcknowledgedPawn(370) - Items(728) - CollectedItemsAllocatorInstance(1D8) - 0x0
-		vars.Helper["ItemCount"] = vars.Helper.Make<uint>(gEngine, 0x1210, 0x38, 0x0, 0x30, 0x370, 0x728, 0x1D8, 0x8);
+		vars.Helper["ItemsCount"] = vars.Helper.Make<uint>(gEngine, 0x1210, 0x38, 0x0, 0x30, 0x370, 0x728, 0x1E0);
 
 		
 		
@@ -178,6 +188,7 @@
 		current.LastItemText = "";
 		current.ItemSetting = "";
 		current.loadReady = false;
+		current.LevelStreamingPretty = "";
 	}
 
 	update
@@ -202,7 +213,13 @@
 		if (old.AcknowledgedPawn != current.AcknowledgedPawn)
 			vars.Log("AcknowledgedPawn: " + old.AcknowledgedPawn + " -> " + current.AcknowledgedPawn);
 
-		var placeholder = vars.FNameToString(current.StateWidget);
+		var LevelStreaming = vars.FNameToString(current.LevelStreamingName);
+		if (!string.IsNullOrEmpty(LevelStreaming) && LevelStreaming != "None")
+			current.LevelStreaming = LevelStreaming;
+		if (old.LevelStreaming != current.LevelStreaming)
+			vars.Log("LevelStreaming: " + old.LevelStreaming + " -> " + current.LevelStreaming);
+
+		var placeholder = vars.FNameToString(current.AcknowledgedPawnName);
 		if (!string.IsNullOrEmpty(placeholder) && placeholder != "None")
 			current.placeholderTest = placeholder;
 		if (old.placeholderTest != current.placeholderTest)
@@ -215,33 +232,72 @@
 		{current.loadReady = false;}
 
 		#region Item Check
-		const string ItemFormat = "[{0}] {1} ({2})";
+		var currentItems = new List<string>();
+		for (int i = 0; i < vars.Helper["PersistentGameplayTagCountMapNum"].Current; i++)
+		{
+			ulong ReadItemName = vars.Helper.Read<ulong>(vars.Helper["PersistentGameplayTagCountMap"].Current + (i * 0x14));
+			var itemName = vars.FNameToString(ReadItemName);
+			currentItems.Add(itemName);
+		}
 
-				for (int i = 0; i < current.ItemCount; i++)
+		// Only track inventory additions when not loading
+		if (!current.loadRemovalReady)
+		{
+			foreach (var item in currentItems)
+			{
+				if (!vars.LastInventoryItems.Contains(item))
 				{
-					ulong item   = vars.Helper.Read<ulong>(current.Items + 0xC * i);
-					int   amount = vars.Helper.Read<int>(current.Items + 0x8 + 0xC * i);
-
-					int oldAmount;
-					if (vars.Inventory.TryGetValue(item, out oldAmount))
-					{
-					}
-					else
-					{
-						current.ItemSetting = string.Format(ItemFormat, '+', vars.FNameToString(item), '!');
-						vars.splitstoComplete.Add(current.ItemSetting);
-					}
-					vars.Inventory[item] = amount;
+					vars.Log("Inventory Item Added: " + item);
+					vars.ItemDisplay = item;
 				}
+			}
+		}
+
+		foreach (var item in vars.LastInventoryItems)
+		{
+			if (!currentItems.Contains(item))
+			{
+				vars.Log("Inventory Item Removed: " + item);
+			}
+		}
+
+    	vars.LastInventoryItems = currentItems;
+		#endregion
+
+		#region Desktop Data Dump
+		try
+		{
+			string desktop  = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+			string filePath = Path.Combine(desktop, "CronosDump.txt");
+
+			if (!File.Exists(filePath))
+				File.WriteAllText(filePath, "CRONOS DATA DUMP\n");
+
+			// write only when ItemDisplay changes AND is non-empty
+			if (!string.IsNullOrWhiteSpace(vars.ItemDisplay) && vars.ItemDisplay != vars.LastItemDisplay)
+			{
+				using (var sw = File.AppendText(filePath))
+					sw.WriteLine(DateTime.Now.ToString("HH:mm:ss") + " - " + vars.ItemDisplay);
+
+				vars.LastItemDisplay = vars.ItemDisplay; // remember last written value
+			}
+		}
+		catch (Exception ex)
+		{
+			print("[Error Writing CronosDump.txt] " + ex.Message);
+		}
 		#endregion
 	
-		#region Prettifying Coordinates
+		#region Prettifying Data
 		current.playerPosXPretty = (double.IsNaN(current.playerPosX) || double.IsInfinity(current.playerPosX)) ? "—" : current.playerPosX.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
 		current.playerPosYPretty = (double.IsNaN(current.playerPosY) || double.IsInfinity(current.playerPosY)) ? "—" : current.playerPosY.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
 		current.playerPosZPretty = (double.IsNaN(current.playerPosZ) || double.IsInfinity(current.playerPosZ)) ? "—" : current.playerPosZ.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
+
+		var s = (current.LevelStreaming ?? "").Replace("WorldPartitionLevelStreaming_", "");
+		current.LevelStreamingPretty = (s.Length == 0 || s == "None") ? "No Level Streaming" : s.Substring(System.Math.Max(s.LastIndexOf('_') + 1, 0));
 		#endregion
 
-		vars.SetTextIfEnabled("placeholder",current.Pause);
+		vars.SetTextIfEnabled("placeholder",current.placeholderTest);
 		vars.SetTextIfEnabled("movementCheckLoad",current.movementCheckLoad);
 		vars.SetTextIfEnabled("loadRemovalReady",current.loadRemovalReady);
 		vars.SetTextIfEnabled("playerPos",current.playerPosXPretty + " " + current.playerPosYPretty + " " + current.playerPosZPretty);
@@ -249,7 +305,9 @@
 		vars.SetTextIfEnabled("AcknowledgedPawn",current.AcknowledgedPawn);
 		vars.SetTextIfEnabled("camTarget",current.camTarget);
 		vars.SetTextIfEnabled("MaxAcceleration",current.MaxAcceleration);
-		vars.SetTextIfEnabled("LastItem",current.ItemSetting);
+		vars.SetTextIfEnabled("GameplayTag",vars.ItemDisplay);
+		vars.SetTextIfEnabled("LevelStreaming",current.LevelStreamingPretty);
+		
 
 		//vars.Log("Pause: " + current.Pause);
 	}
@@ -268,8 +326,7 @@
 	onStart
 	{
 		vars.CompletedSplits.Clear();
-		vars.CompletedSplits.Clear();
-		vars.Inventory.Clear();
+		vars.LastInventoryItems.Clear();
 		current.LastItemText = "";
 	}
 
@@ -277,6 +334,26 @@
     {
 		return current.loadReady || current.AcknowledgedPawnPtr == null || current.DeathLoad || current.MaxAcceleration == 2048;
 	}
+
+	//WIP taken from 
+	//https://raw.githubusercontent.com/Arkhamfan69/My-Splitters-Load-Removers/refs/heads/main/Autosplitters/Papao.asl
+	//https://github.com/Arkhamfan69/My-Splitters-Load-Removers/blob/main/Xml%20Settings/Papao_Settings.xml
+	/*
+	split 
+	{
+		foreach (var item in vars.LastInventoryItems)
+		{
+			if (settings.ContainsKey(item) && settings[item])
+			{
+				if (!vars.SplitInventoryItems.Contains(item))
+				{
+					vars.SplitInventoryItems.Add(item);
+					return true;
+				}
+			}
+		}
+	}
+	*/
 
 	exit
 	{
