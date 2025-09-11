@@ -22,7 +22,7 @@
 			{ "CollectedCats.CollectedCat01",               false, "Collected Cat 01",                              "Chapter Splits" },
 			{ "Resources.MetalScrapsS",                     false, "Resources Metal Scraps S",                      "Chapter Splits" },
 			{ "Weapon.Flamethrower",                        false, "Acquired Flamethrower",                           "Chapter Splits" },
-			{ "Weapon.Shotgun",                             true, "Aquired Shotgun",                                "Chapter Splits" },
+			{ "ShotgunAmmoRecipe",                          true, "Aquired Shotgun",                                "Chapter Splits" },
 			{ "AZHasStoreKey",                              false , "AZ Grabbed Hardware Store Key",                 "Chapter Splits" },
 			{ "AZHasBoltcutter",                            false, "AZ Has Boltcutter",                             "Chapter Splits" },
 			{ "AZPickedUpTheCore",                          false, "AZ Picked Up The Core",                         "Chapter Splits" },
@@ -453,18 +453,18 @@
 	//https://raw.githubusercontent.com/Arkhamfan69/My-Splitters-Load-Removers/refs/heads/main/Autosplitters/Papao.asl
 	//https://github.com/Arkhamfan69/My-Splitters-Load-Removers/blob/main/Xml%20Settings/Papao_Settings.xml
 	
-	split 
+	split
 	{
-		foreach (var tag in vars.LastGameplayTags)
+		if (settings.ContainsKey(vars.TagDisplay) && settings[vars.TagDisplay] && !vars.CompletedSplits.Contains(vars.TagDisplay))
 		{
-			if (settings.ContainsKey(tag) && settings[tag])
-			{
-				if (!vars.CompletedSplits.Contains(tag))
-				{
-					vars.CompletedSplits.Add(tag);
-					return true;
-				}
-			}
+			vars.CompletedSplits.Add(vars.TagDisplay);
+			return true;
+		}
+
+		if (settings.ContainsKey(vars.ItemDisplay) && settings[vars.ItemDisplay] && !vars.CompletedSplits.Contains(vars.ItemDisplay))
+		{
+			vars.CompletedSplits.Add(vars.ItemDisplay);
+			return true;
 		}
 	}
 
