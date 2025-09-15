@@ -23,101 +23,96 @@
 			{ "Anchor",                                    false, "Anchor",                                    "Chapter Splits" }, // right after EmitterMode
 			{ "ShotgunAmmoRecipe",                         true, "Shotgun",                                    "Chapter Splits" }, // 
 			{ "AZHasStoreKey",                             true, "AZ Has Store Key",                          "Chapter Splits" }, // Gameplay tag
-			{ "AZHasBoltCutter",                           true, "AZ Has Bolt Cutter",                        "Chapter Splits" }, // Gameplay tag
-			{ "AZElevatorUnmergFors",                      false, "AZ Elevator Unmerg Fors",                   "Chapter Splits" }, // Gameplay tag
+			{ "Boltcutter",                                true, "Acquired Boltcutters",                        "Chapter Splits" }, // Gameplay tag
+			{ "AZElevatorUnmergFors",                      false, "Riding Apartments Elevator",                "Chapter Splits" }, // Gameplay tag
 			//{ "y_25",                                      false, "Y 25",                                      "Chapter Splits" }, // last "item" when kamu entered apartments 2
 			// --- Apartments 2 ---
-			{ "AZAngelaPictureFound",                      false, "AZ Angela Picture Found",                   "Chapter Splits" }, // Gameplay tag
-			{ "AZHasShelterKey",                           true, "AZ Has Shelter Key",                        "Chapter Splits" }, // Gameplay tag
+			{ "AZAngelaPictureFound",                      true, "Searched Edwards Apartment",                 "Chapter Splits" }, // Gameplay tag
+			{ "AZ_Janitor_Key",                            true, "AZ Has Shelter Key",                         "Chapter Splits" }, // Gameplay tag
+			{ "SPBurnIncreasedDamageTaken",                true, "Edwards Souls / End of Apartments 2",        "Chapter Splits" }, // Gameplay tag
 			// --- Train station A ---
-			{ "AZHasEdwardSoul",                           false, "AZ Has Edward Soul",                        "Chapter Splits" }, // Gameplay tag
 			{ "Cutscenes.C002.Played",                     false, "Cutscenes C002 Played",                     "Chapter Splits" }, // Gameplay tag
-			{ "SSZLightsTechSection1",                     true, "SSZ Lights Tech Section 1",                 "Chapter Splits" }, // Gameplay tag
+			{ "SSZLightsTechSection1",                     true, "Power Up Tram",                              "Chapter Splits" }, // Gameplay tag
 			{ "ScannerMode",                               false, "Scanner Mode",                              "Chapter Splits" }, // 
 			{ "SSZLightsTechSection2",                     true, "SSZ Lights Tech Section 2",                 "Chapter Splits" }, // Gameplay tag
 			// --- Steelworks 1 ---
-			{ "MineAmmoRecipe",                            true, "Mine Ammo Recipe",                          "Chapter Splits" }, // 
-			{ "STW_KilledMagAChubby",                      false, "STW Killed Mag A Chubby",                   "Chapter Splits" }, // Gameplay tag
+			{ "MineAmmoRecipe",                            true, "Pyre",                                       "Chapter Splits" }, // 
+			{ "STW_KilledMagAChubby",                      false, "Killed Mag A Chubby",                       "Chapter Splits" }, // Gameplay tag
 			{ "FZHallBDoorOpened",                         true, "FZ Hall B Door Opened",                     "Chapter Splits" }, // Gameplay tag
 			{ "Handgun02Mode",                             true, "Handgun 02 Mode",                           "Chapter Splits" }, // 
-			{ "GravityBootsMode",                          true, "Gravity Boots Mode",                        "Chapter Splits" }, // 
-			{ "STW_GravityBootesAcquired",                 false, "STW Gravity Boots Acquired",                "Chapter Splits" }, // Gameplay tag at the same time as GravityBootsMode
+			{ "STW_GravityBootsAcquired",                   true, "STW Gravity Boots Acquired",                "Chapter Splits" }, // Gameplay tag at the same time as GravityBootsMode
 			// --- Steelworks 2 ---
-			{ "LootPhase.TerrorD_FZ",                      false, "Boss Start",                                "Chapter Splits" }, // Gameplay tag (Boss start)
-			{ "SSZReturnFromFZ",                           true, "Boss End",                                   "Chapter Splits" }, // Gameplay tag (Boss end)
-			{ "Souls.Artur",                               false, "Souls Artur",                               "Chapter Splits" }, // Gameplay tag (Souls.Gabriel if other option)
-			{ "Souls.Gabriel",                             false, "Souls Gabriel",                             "Chapter Splits" }, // Gameplay tag (Souls.Gabriel if other option)
-			// --- A-0 ---
-			{ "IdleSoulLeaksUnlocked",                     true, "Idle Soul Leaks Unlocked",                  "Chapter Splits" }, // Gameplay tag
-			{ "MachineGunAmmoRecipe",                      true, "Machine Gun",                                "Chapter Splits" }, // 
-			// --- Hospital ---
+			{ "LootPhase.TerrorD_FZ",                      false, "Steelworks Terror Boss Start",             "Chapter Splits" }, // Gameplay tag (Boss start)
+			{ "SSZReturnFromFZ",                           true, "Steelworks Terror Boss Dead",               "Chapter Splits" }, // Gameplay tag (Boss end)
+			{ "SPHandgunsHeadshotDamage",                  true, "Artur's/Gabriels Soul/End of Steelworks",   "Chapter Splits" }, // Gameplay tag (Souls.Gabriel if other option)
+			// --- A-0 / Hospital ---
+			{ "IdleSoulLeaksUnlocked",                     true, "A-0 Terminal",                               "Chapter Splits" }, // Gameplay tag
+			{ "MachinegunAmmoRecipe",                      true, "Machine Gun",                                "Chapter Splits" }, // 
 			{ "HZ_GuardPostKey",                           false, "HZ Guard Post Key",                         "Chapter Splits" }, // 
 			{ "HZ_WingB_Open",                             true, "HZ Wing B Open",                            "Chapter Splits" }, // Gameplay tag
 			{ "HZ_MorgueLights.Normal",                    false, "HZ Morgue Lights Normal",                   "Chapter Splits" }, // Gameplay tag
 			{ "HZ_MorgueKey",                              true, "HZ Morgue Key",                             "Chapter Splits" }, // 
 			{ "HZ_MorgueLights.Flicker",                   false,  "HZ Morgue Lights Flicker",                 "Chapter Splits" },
-
-			//UNTESTED
-			{ "HZ_KeycardAcquired",                         false, "HZ Keycard Acquired",                           "Chapter Splits" },
-			{ "HZ_Chems_PickUp.ChemsC",                     false, "HZ Chems Pick Up Chems C",                      "Chapter Splits" },
-			{ "HZ_WingA_Open",                              false, "HZ Wing A Open",                                "Chapter Splits" },
-			{ "AngelaDiary.HZ03",                           false, "Angela Diary HZ03",                             "Chapter Splits" },
-			{ "HZ_MedSupsDone",                             false, "HZ Med Sups Done",                              "Chapter Splits" },
-			{ "HZ_Chems_PickUp.ChemsA",                     false, "HZ Chems Pick Up Chems A",                      "Chapter Splits" },
-			{ "HZ_InfectiousDone",                          false, "HZ Infectious Done",                            "Chapter Splits" },
-			{ "HZ_Chems_PickUp.ChemsB",                     false, "HZ Chems Pick Up Chems B",                      "Chapter Splits" },
-			{ "HZ_HeartKilled.ClearElevator",               false, "HZ Heart Killed Clear Elevator",                "Chapter Splits" },
-			{ "HZ_HeartKilled.AnimationStopped",            false, "HZ Heart Killed Animation Stopped",             "Chapter Splits" },
-			{ "HZ_HeartKilled",                             false, "HZ Heart Killed",                               "Chapter Splits" },
+			{ "HZ_DirectorsCard",                           true, "HZ Director's Keycard Acquired",                           "Chapter Splits" },
+			{ "HZ_WingA_Open",                              true, "HZ Wing A Open",                                "Chapter Splits" },
+			{ "HZ_Chems_PickUp.ChemsA",                     false, "HZ Picked Up Formula Z-5",                      "Chapter Splits" },
+			{ "HZ_Chems_PickUp.ChemsB",                     false, "HZ Picked Up Formula C-66",                      "Chapter Splits" },
+			{ "HZ_Chems_C",                                 false, "HZ Picked Up Formula X-44",                      "Chapter Splits" },
+			{ "HZ_Mixture",                                 true, "HZ Formula Mixed",                               "Chapter Splits" },
+			{ "HZ_HeartKilled.ClearElevator",               true, "HZ Heart Killed",                                "Chapter Splits" },
 			{ "HZ_HF_BossStart",                            false, "HZ HF Boss Start",                              "Chapter Splits" },
-			{ "HZ_HF_BossDead",                             false, "HZ HF Boss Dead",                               "Chapter Splits" },
-			{ "CollectedCats.CollectedCat08",               false, "Collected Cat 08",               "Chapter Splits" },
-			{ "CollectedCats.CollectedCat09",               false, "Collected Cat 09",               "Chapter Splits" },
+			{ "HZ_HF_BossDead",                             true, "HZ HF Boss Dead",                               "Chapter Splits" },
 			{ "HZ_IslandsReturn",                           false, "HZ Islands Return",                             "Chapter Splits" },
-			{ "SSZReturnFromHZ",                            false, "SSZ Return From HZ",                            "Chapter Splits" },
-			{ "HZ_IslandsReturn.YardLights",                false, "HZ Islands Return Yard Lights",                 "Chapter Splits" },
-			{ "HZ_IslandsReturn.TeleportFar_1_Forward",     false, "HZ Islands Return Teleport Far 1 Forward",      "Chapter Splits" },
-			{ "HZ_IslandsReturn.TeleportFar_1_Return",      false, "HZ Islands Return Teleport Far 1 Return",       "Chapter Splits" },
+			{ "SSZReturnFromHZ",                            true, "SSZ Return From HZ",                            "Chapter Splits" },
+			// --- Island ---
+			{ "HZ_IslandsReturn.YardLights",                false, "HZ Islands  Yard Lights",                       "Chapter Splits" },
+			{ "HZ_IslandsReturn.TeleportFar_2_Forward",     true,  "HZ Islands Teleport 1",                         "Chapter Splits" },
+			{ "HZ_IslandsReturn.TeleportFar_3_Forward",     false, "HZ Islands Teleport 2",                         "Chapter Splits" },
 			{ "HZ_IslandsReturn.AngelaScene",               false, "HZ Islands Return Angela Scene",                "Chapter Splits" },
 			{ "HZ_IslandsReturn.AngelaScene.SpawnUnmerged", false, "HZ Islands Return Angela Scene Spawn Unmerged", "Chapter Splits" },
 			{ "HZ_IslandsReturn.PhoneBoothLights",          false, "HZ Islands Return Phone Booth Lights",          "Chapter Splits" },
 			{ "HZ_IslandsReturn.QuadScene",                 false, "HZ Islands Return Quad Scene",                  "Chapter Splits" },
-			{ "HZ_IslandsReturn.TeleportFar_2_Forward",     false, "HZ Islands Return Teleport Far 2 Forward",      "Chapter Splits" },
 			{ "HZ_IslandsReturn.ArturSuicide",              false, "HZ Islands Return Artur Suicide",               "Chapter Splits" },
-			{ "HZ_IslandsReturn.TeleportFar_3_Forward",     false, "HZ Islands Return Teleport Far 3 Forward",      "Chapter Splits" },
 			{ "HZ_IslandsReturn.TeleportFar_4_Forward",     false, "HZ Islands Return Teleport Far 4 Forward",      "Chapter Splits" },
 			{ "HZ_IslandsReturn.WardenScene",               false, "HZ Islands Return Warden Scene",                "Chapter Splits" },
 			{ "HZ_IslandsReturn.WeronikaInDark",            false, "HZ Islands Return Weronika In Dark",            "Chapter Splits" },
 			{ "HZ_IslandsReturn.ReturnExit",                false, "HZ Islands Return Return Exit",                 "Chapter Splits" },
-			{ "Souls.Dawid",                                false, "Dawid's Soul",                                   "Chapter Splits" },
-			{ "SSZConductorCutscene",                       false, "SSZ Conductor Cutscene",                        "Chapter Splits" },
-			{ "SSZSB_FirstPuzzleDone",                      false, "SSZSB First Puzzle Done",                       "Chapter Splits" },
-			{ "SSZSB_Generator_I_Active",                   false, "SSZSB Generator I Active",                      "Chapter Splits" },
-			{ "StationBDrawing",                            false, "Station B Drawing",                             "Chapter Splits" },
-			{ "SSZSB_Generator_II_Active",                  false, "SSZSB Generator II Active",                     "Chapter Splits" },
-			{ "ArbalestMode",                               false, "Acquired Arbalest",                               "Chapter Splits" },
-			{ "Souls.Marcel",                               false, "Souls Marcel",                                  "Chapter Splits" },
-			{ "CCZRoadReached",                            false, "CCZ Road Reached",                             "Chapter Splits" },
-			{ "CCZAbbeyReached",                            false, "CCZ Abbey Reached (Abbey Fight Skip)",                             "Chapter Splits" },
-			{ "CCZAbbeyPowerRestored",                      false, "CCZ Abbey Power Restored",                      "Chapter Splits" },
-			{ "CollectedCats.CollectedCat10",               false, "Collected Cat 10",               "Chapter Splits" },
-			{ "CCZChildTaken",                              false, "CCZ Child Taken",                               "Chapter Splits" },
-			{ "CCZCatacombsOpen",                           false, "CCZ Catacombs Open",                            "Chapter Splits" },
-			{ "CCZNewLeverPicked",                          false, "CCZ New Lever Picked",                          "Chapter Splits" },
-			{ "CCZCourtyardReached",                        false, "CCZ Courtyard Reached",                         "Chapter Splits" },
-			{ "CCZLeverUsed",                               false, "CCZ Lever Used",                                "Chapter Splits" },
-			{ "CCZStatuePicked",                            false, "CCZ Statue Picked",                             "Chapter Splits" },
-			{ "Souls.Krzysztof",                            false, "Souls Krzysztof",                               "Chapter Splits" },
-			{ "CCZElisaDead",                               false, "CCZ Elisa Dead",                                "Chapter Splits" },
-			{ "CCZRoadBackTag",                             false, "CCZ Road Back Tag",                             "Chapter Splits" },
-			{ "CCZBodyPicked",                              false, "CCZ Body Picked Up after Eliza Dead",                               "Chapter Splits" },
-			{ "SSZReturnFromCCZ",                           false, "SSZ Return From CCZ",                           "Chapter Splits" },
-			{ "THZLabVisionFinished",                       false, "THZ Lab Vision Finished",                       "Chapter Splits" },
-			{ "THZCorridorGlitch",                          false, "THZ Corridor Glitch",                           "Chapter Splits" },
-			{ "THZHDComplete",                              false, "THZ HD Complete",                               "Chapter Splits" },
+			{ "Souls.Dawid",                                true, "Dawid's Soul/End of Island",                     "Chapter Splits" },
+			{ "SSZConductorCutscene",                       true, "End of Angela Cutscene",                        "Chapter Splits" },
+			{ "ConductorMode",                              true, "End of Warden Cutscene",                        "Chapter Splits" },
+			{ "SSZSB_FirstPuzzleDone",                      true, "SSZSB First Puzzle Done",                       "Chapter Splits" },
+			{ "SSZSB_Generator_I_Active",                   true, "SSZSB Generator I Active",                      "Chapter Splits" },
+			{ "SSZSB_Generator_II_Active",                  true, "SSZSB Generator II Active",                     "Chapter Splits" },
+			{ "CCZRoadReached",                             true, "CCZ Road Reached",                              "Chapter Splits" },
+			{ "CCZAbbeyReached",                            true, "CCZ Abbey Reached (Abbey Fight Skip)",           "Chapter Splits" },
+			{ "CCZAbbeyPowerRestored",                      true, "CCZ Abbey Power Restored",                      "Chapter Splits" },
+			{ "CCZCatacombsOpen",                           true, "CCZ Catacombs Open",                            "Chapter Splits" },
+			{ "CCZ_Statuette_3_Child",                      true, "CCZ Child Statuette",                           "Chapter Splits" },
+			{ "CCZ_Statuette_5_Trident",                    true, "CCZ Trident Statuette",                          "Chapter Splits" },
+			{ "CCZCourtyardReached",                        true, "CCZ Courtyard Reached",                         "Chapter Splits" },
+			{ "CCZ_Statuette_2_Sword",                      true, "CCZ Sword Statuette",                          "Chapter Splits" },
+			{ "CCZ_Statuette_6_Cauldron",                   true, "CCZ Cauldron Statuette",                        "Chapter Splits" },
+			{ "LootPhase.Eliza",                            false, "CCZ Start Eliza Fight",                         "Chapter Splits" },
+			{ "CCZRoadBackTag",                             true, "CCZ Elisa Dead",                                "Chapter Splits" },
+			{ "SSZReturnFromCCZ",                           true, "SSZ Return From CCZ",                           "Chapter Splits" },
+			// --- SSZ Again ---
+			{ "SSZ_MilitiaStationKey",                      true, "SSZ Militia Station Key",                        "Chapter Splits" },
+			{ "THZCorridorGlitch",                          true, "THZ Corridor Glitch",                           "Chapter Splits" },
 			{ "THZ_Centi_Killed",                           false, "THZ Centi Killed",              				   "Chapter Splits" },
+			{ "THZHDComplete",                              true, "THZ HD Complete",                               "Chapter Splits" },
 			{ "THZ_PathfinderSpawn",                        false, "THZ PathfinderSpawn",              			   "Chapter Splits" },
 			{ "THZ_PathfinderDead",                         true,  "THZ PathfinderDead",              			   "Chapter Splits" },
+
+			{ "CollectedCats.CollectedCat01",               false, "Collected Cat 01",               "Chapter Splits" },
+			{ "CollectedCats.CollectedCat02",               false, "Collected Cat 02",               "Chapter Splits" },
+			{ "CollectedCats.CollectedCat03",               false, "Collected Cat 03",               "Chapter Splits" },
+			{ "CollectedCats.CollectedCat04",               false, "Collected Cat 04",               "Chapter Splits" },
+			{ "CollectedCats.CollectedCat05",               false, "Collected Cat 05",               "Chapter Splits" },
+			{ "CollectedCats.CollectedCat06",               false, "Collected Cat 06",               "Chapter Splits" },
+			{ "CollectedCats.CollectedCat07",               false, "Collected Cat 07",               "Chapter Splits" },
+			{ "CollectedCats.CollectedCat08",               false, "Collected Cat 08",               "Chapter Splits" },
+			{ "CollectedCats.CollectedCat09",               false, "Collected Cat 09",               "Chapter Splits" },
+
 		{"GameInfo", 					true, "Print Various Game Info",						null},
 			{"World",                 false, "Current World",                                "GameInfo"},
 			{"camTarget",               false, "Current Camera Target",         				"GameInfo"},
@@ -366,33 +361,6 @@
         }
 
         vars.LastInventoryItems = currentItems;
-		#endregion
-
-		#region Desktop Data Dump
-		if (settings["Debug Desktop Data Dump"])
-		{
-			try
-			{
-				string desktop  = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				string filePath = Path.Combine(desktop, "CronosDump.txt");
-
-				if (!File.Exists(filePath))
-					File.WriteAllText(filePath, "CRONOS DATA DUMP\n");
-
-				// write only when ItemDisplay changes AND is non-empty
-				if (!string.IsNullOrWhiteSpace(vars.TagDisplay) && vars.TagDisplay != vars.LastTagDisplay)
-				{
-					using (var sw = File.AppendText(filePath))
-						sw.WriteLine(DateTime.Now.ToString("HH:mm:ss") + " - " + vars.TagDisplay);
-
-					vars.LastTagDisplay = vars.TagDisplay; // remember last written value
-				}
-			}
-			catch (Exception ex)
-			{
-				print("[Error Writing CronosDump.txt] " + ex.Message);
-			}
-		}
 		#endregion
 	
 		#region Prettifying Data
